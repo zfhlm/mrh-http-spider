@@ -19,6 +19,7 @@
 		<com.squareup.okhttp3.version>4.9.3</com.squareup.okhttp3.version>
 		<org.jsoup.version>1.14.3</org.jsoup.version>
 		<org.springframework.version>5.3.13</org.springframework.version>
+		<com.sleepycat.je.version>18.3.12</com.sleepycat.je.version>
 	</properties>
 
 	<dependencies>
@@ -108,6 +109,13 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${org.apache.logging.log4j.version}</version>
+		</dependency>
+
+		<!-- berkeleydb -->
+		<dependency>
+			<groupId>com.sleepycat</groupId>
+			<artifactId>je</artifactId>
+			<version>${com.sleepycat.je.version}</version>
 		</dependency>
 
 	</dependencies>

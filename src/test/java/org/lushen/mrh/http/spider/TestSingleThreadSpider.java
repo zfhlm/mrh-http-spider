@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.swing.filechooser.FileSystemView;
+
 import org.lushen.mrh.http.spider.client.HttpComponentsClient;
 import org.lushen.mrh.http.spider.collector.RegexCollector;
 import org.lushen.mrh.http.spider.impl.SingleThreadSpider;
-import org.lushen.mrh.http.spider.repository.MemoryRepository;
+import org.lushen.mrh.http.spider.repository.BerkeleyRepository;
 
 public class TestSingleThreadSpider {
 
@@ -22,7 +24,8 @@ public class TestSingleThreadSpider {
 		HttpUrlCollector collector = new RegexCollector(() -> idGenerator.incrementAndGet());
 
 		// url 存储仓库
-		HttpRepository repository = new MemoryRepository();
+		String file = FileSystemView.getFileSystemView().getHomeDirectory().getPath();
+		HttpRepository repository = new BerkeleyRepository(file, "test", false);
 
 		// url 过滤器
 		List<HttpUrlFilter> filters = Arrays.asList(new HttpUrlFilter() {

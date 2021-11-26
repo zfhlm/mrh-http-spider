@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.apache.commons.collections4.map.LinkedMap;
 import org.lushen.mrh.http.spider.HttpRepository;
@@ -132,9 +131,10 @@ public class MemoryRepository implements HttpRepository {
 					MemoryRepository.this.running.remove(this.httpUrl.getUrl());
 					MemoryRepository.this.waiting.put(this.httpUrl.getUrl(), this.httpUrl);
 				}
-				Optional.ofNullable(MemoryRepository.this.repository.get(this.httpUrl.getUrl())).ifPresent(e -> {
-					e.setAttempts(e.getAttempts()+1);
-				});
+				{
+					HttpUrl url = MemoryRepository.this.repository.get(this.httpUrl.getUrl());
+					url.setAttempts(url.getAttempts()+1);
+				}
 			}
 		}
 
